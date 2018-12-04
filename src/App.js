@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from './Navbar';
-import ProductPage from './ProductPage';
+import ProductDetails from './ProductDetails';
 import Shop from './Shop';
 
 class App extends Component {
@@ -9,22 +9,25 @@ class App extends Component {
     return (
       <div className="App">
       <NavBar />
-      <Switch>
-        <Route 
+      <Switch> 
+        <Route
           exact
           path='/products'
           render={() => <Shop route={'products'} />}/>
-
+        
         <Route
           exact
           path = '/products/:id'
-          render={() => <ProductPage route={'cart'} />}/>
+          render={(props) => <ProductDetails {...props} />}/>
           
         <Route
           exact
           path = '/cart'
           render={() => <Shop route={'cart'} />}/>
 
+        <Route 
+          path='/'
+          render={() => <Redirect to={'/products'} />}/>
       </Switch>
       </div>
     );
