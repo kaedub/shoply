@@ -16,20 +16,21 @@ class ProductDetails extends Component {
 
   componentDidMount() {    
     const id = +this.props.match.params.id;
-    const currentProduct = this.props.products.find(p => p.id === id);
-    if (currentProduct)
-      this.setState({
-          currentProduct,
-          loading: false,
-      });
+    console.log('mount', this.state)
+    this.setState({
+        id,
+        currentProduct: this.state.products,
+        loading: false,
+    });
   }
 
   handleAddToCart = evt => {
     // let product
-    this.props.addToCart(this.state.currentProduct); 
+    this.props.addToCart(this.state.id); 
   }
 
   render() {  
+    console.log('details', this.props)
     if (this.state.loading) return <h1>Loading...</h1>
     return (
     <Container>
@@ -55,7 +56,9 @@ class ProductDetails extends Component {
     );
   }
 }
+
 function mapStateToProps(state, props) {
+  console.log('mstp', state)
   return {products: state.products}
 }
 

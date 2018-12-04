@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { 
   Collapse, 
   Navbar, 
@@ -47,7 +48,7 @@ class NavBar  extends React.Component {
             <Nav>
               <NavItem className="my-auto">
                 <Link to="/cart">
-                  Cart <Badge color="secondary">0</Badge>
+                  Cart <Badge color="secondary">{this.props.cart_count}</Badge>
                 </Link>
               </NavItem>
             
@@ -78,4 +79,8 @@ class NavBar  extends React.Component {
   }
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+  return {cart_count: state.cart.length};
+}
+
+export default connect(mapStateToProps)(NavBar);

@@ -1,8 +1,13 @@
 import { ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART } from './actionTypes';
-import PRODUCTS from './data.json';
+import PRODUCTS_ARR from './data.json';
+
+const PRODUCTS_OBJ = {};
+for (let item of PRODUCTS_ARR.items) {
+  PRODUCTS_OBJ[item.id] = item;
+}
 const INITIAL_STATE = {
- products: PRODUCTS.items,
- cart: [1,2,3,3],
+ products: PRODUCTS_OBJ,
+ cart: [PRODUCTS_ARR.items[0], PRODUCTS_ARR.items[4], PRODUCTS_ARR.items[2], PRODUCTS_ARR.items[5]],
 }
 
 function rootReducer(state=INITIAL_STATE, action) {

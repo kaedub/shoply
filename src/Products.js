@@ -73,7 +73,8 @@ class Products extends Component {
 }
 
 function mapStateToProps(state, props) {
-  return {products: state.products}
+  console.log('products',state)
+  return {products: Object.keys(state.products).map(key => state.products[key])}
 }
 
 export default connect(mapStateToProps)(Products);
