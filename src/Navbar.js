@@ -4,12 +4,23 @@
  */
 
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { 
+  Collapse, 
+  Navbar, 
+  Badge, 
+  NavbarBrand, 
+  NavbarToggler,
+  Nav, 
+  NavItem, 
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
 class NavBar  extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true
@@ -21,22 +32,46 @@ class NavBar  extends React.Component {
       collapsed: !this.state.collapsed
     });
   }
+      
+
   render() {
     return (
       <div>
         <Navbar color="faded" light>
-          <NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse isOpen={!this.state.collapsed} navbar>
+          <Link to="/">
+            <NavbarBrand href="#" className="mr-auto">Shoply</NavbarBrand>
+          </Link>
+
+          {/* <NavbarToggler onClick={this.toggleNavbar} className="mr-2" /> */}
+          {/* <Collapse isOpen={!this.state.collapsed} navbar> */}
             <Nav>
-              <NavItem>
-                <NavLink href="/products">Products</NavLink>
+              <NavItem className="my-auto">
+                <Link to="/cart">
+                  Cart <Badge color="secondary">0</Badge>
+                </Link>
               </NavItem>
-              <NavItem>
-                <NavLink href="/cart">Cart</NavLink>
-              </NavItem>
+            
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Products
+                </DropdownToggle>
+                <DropdownMenu left>
+                  <DropdownItem>
+                    <Link to="/products">All Products</Link>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Link to="/products?category=appliances">Appliances</Link>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Link to="/products?category=electronics">Electronics</Link>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Link to="/products?category=furniture">Furniture</Link>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown> 
             </Nav>
-          </Collapse>
+          {/* </Collapse> */}
         </Navbar>
       </div>
     );
