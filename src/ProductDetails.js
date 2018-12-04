@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addToCart } from './actions';
 import { Container, Media, Button } from 'reactstrap';
 import './ProductDetails.css';
 
@@ -23,12 +24,17 @@ class ProductDetails extends Component {
       });
   }
 
+  handleAddToCart = evt => {
+    // let product
+    this.props.addToCart(this.state.currentProduct); 
+  }
+
   render() {  
-    console.log('render ran', this.props, this.state)
     if (this.state.loading) return <h1>Loading...</h1>
     return (
     <Container>
       <Button 
+        color="warning"
         onClick={() => this.props.history.push('/products')} 
         className='my-3'>Back
       </Button>
@@ -44,14 +50,16 @@ class ProductDetails extends Component {
           Price: ${this.state.currentProduct.price}
         </Media>
       </Media>
-      <Button className='px-5'>Add To Cart</Button>
+      <Button onClick={this.handleAddToCart} color="primary" className='px-5'>Add To Cart</Button>
     </Container>
     );
   }
 }
 function mapStateToProps(state, props) {
-  console.log("mapStateToProps in ProductDetails", state)
   return {products: state.products}
 }
 
-export default connect(mapStateToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  {addToCart}
+)(ProductDetails);
