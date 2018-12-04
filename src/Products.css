@@ -1,0 +1,19 @@
+.Card {
+  text-align: center;
+  max-height: 500px;
+  width: 100%;
+  height: 500px;
+}
+
+.CardImg {
+  width: auto;
+  max-width: 100%;
+  max-height: 300px;
+}
+
+.card-img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

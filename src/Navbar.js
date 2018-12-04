@@ -30,7 +30,10 @@ class NavBar  extends React.Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav>
               <NavItem>
-                <NavLink href="/products">Store</NavLink>
+                <NavLink href="/products">Products</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/cart">Cart</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

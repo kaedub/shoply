@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
-import PRODUCTS from './data.json';
+import { addProduct } from './actions';
 import ProductsList from './Products';
 import Cart from './Cart';
 
@@ -15,7 +15,7 @@ class Shop extends Component {
   }
 
   async componentDidMount() {
-    this.setState({products: PRODUCTS, loading: false});
+    this.setState({loading: false});
   }
 
   render() {
@@ -23,18 +23,22 @@ class Shop extends Component {
     return (
       <Container>
         SHOP
-        <pre>Shop: {JSON.stringify(this.props)}</pre>
+        <pre>Props: {JSON.stringify(this.props)}</pre>
+        <pre>State: {JSON.stringify(this.state)}</pre>
         
-        { this.props.route === 'cart'?
-        <Cart products={this.state.products} /> :
-        <ProductsList products={this.state.products}/>}
+        { this.props.route === 'cart' ?
+        <Cart/> :
+        <ProductsList/>}
       </Container>
     )
   }
 }
 
 function mapStateToProps(state, props) {
-  return [];
+  console.log('map state to props ran with', state)
+  return {products: state.products};
 }
 
-export default connect(mapStateToProps)(Shop);
+export default connect(
+  mapStateToProps,
+  {addProduct})(Shop);

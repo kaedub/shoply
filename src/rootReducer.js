@@ -1,13 +1,16 @@
 import { ADD_PRODUCT, REMOVE_PRODUCT } from './actionTypes';
-
+import PRODUCTS from './data.json';
 const INITIAL_STATE = {
- products: []
+ products: PRODUCTS.items
 }
 
 function rootReducer(state=INITIAL_STATE, action) {
-  let { type, id, name, price, image_url } = action;
+  console.log('rootReducer ran with action ', action);
+  const {type} = action;
+  
   switch (type) {
     case ADD_PRODUCT:
+      const { id, name, price, image_url } = action.product;
       return { products: 
         [ ...state.products,
           { name, price, image_url }

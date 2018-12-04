@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Col, Row, Card, CardBody, CardImg, CardTitle, CardText} from 'reactstrap';
+import { Container, Col, Row, Card, CardBody, CardImg, CardTitle, CardText} from 'reactstrap';
+import './Products.css';
 
 
 class Products extends Component {
   render() {
-    return <div>
-      Products
-      <pre>{JSON.stringify(this.props)}</pre>
+    return (
+    <Container className="Products">
+      <h1>Products</h1>
       <Row>
-      {this.props.products.items.map(prod => {
+      {this.props.products.map(prod => {
         return (
-        <Col className="Products img-thumbnail my-3" xs="12" sm="6" md="4">
-        <Card className="p-3">
-          <Link to={`/products/${prod.id}`}>
-            <CardImg top width="100%" src={prod.image_url} alt="Card image cap" />
-          </Link>  
+        <Col className="my-3" xs="12" sm="12" md="6" lg="4" xl="4">
+        <Card className="Card p-3">
+          <div className="card-img-box">
+          <Link to={`/products/${prod.id}`} className="Link">
+            <CardImg 
+              top 
+              className="CardImg"
+              src={prod.image_url} 
+              alt="Card image cap" />
+          </Link> 
+          </div> 
           <CardBody>
-            <CardTitle>{prod.name}</CardTitle>
+            <Link to={`/products/${prod.id}`} className="Link">
+              <CardTitle>{prod.name}</CardTitle>
+            </Link>
             <CardText>Price: ${prod.price}</CardText>
             <CardText bottom>
               <small className="text-muted">Last updated 3 mins ago</small>
@@ -28,8 +38,12 @@ class Products extends Component {
         )
       })}
       </Row>
-    </div>;
+    </Container>);
   }
 }
 
-export default Products;
+function mapStateToProps(state, props) {
+  return {products: state.products}
+}
+
+export default connect(mapStateToProps)(Products);
