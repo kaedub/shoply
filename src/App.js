@@ -5,21 +5,33 @@ import ProductDetails from './ProductDetails';
 import Products from './Products';
 import Cart from './Cart';
 
+/** Some makeshift hacked together query string parser */
+function parseQueryString(s) {
+  return s.slice(1).split('&')[0].split('=')[1];
+}
+
 class App extends Component {
   render() {
+    console.log('App Render')
     return (
       <div className="App">
       <NavBar />
+
       <Switch> 
         <Route
           exact
           path='/products'
-          render={() => <Products />}/>
+          render={props => {
+            return <Products 
+              {...props} 
+              query={parseQueryString(props.location.search)} 
+            
+        />}}/>
         
         <Route
           exact
           path = '/products/:id'
-          render={(props) => <ProductDetails {...props} />}/>
+          render={props => <ProductDetails {...props} />}/>
         
         <Route
           exact
