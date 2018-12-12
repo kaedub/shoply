@@ -16,7 +16,6 @@ class ProductDetails extends Component {
 
   componentDidMount() {    
     const id = +this.props.match.params.id;
-    console.log('mount', this.state)
     this.setState({
         id,
         currentProduct: this.state.products,
