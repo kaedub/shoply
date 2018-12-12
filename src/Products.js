@@ -58,7 +58,7 @@ class Products extends Component {
                 <CardText>Price: ${prod.price}</CardText>
                 <CardText>Category: {capitalize(prod.category)}</CardText>
                 <CardText>
-                  <small className="text-muted">Last updated 3 mins ago</small>
+                  <small className="text-muted">Last updated 5 hours ago</small>
                 </CardText>
               </CardBody>
             </Card>
@@ -73,7 +73,6 @@ class Products extends Component {
 }
 
 function mapStateToProps(state, props) {
-  console.log('products',state)
   return {products: Object.keys(state.products).map(key => state.products[key])}
 }
 

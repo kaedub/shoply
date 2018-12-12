@@ -18,7 +18,7 @@ class ProductDetails extends Component {
     const id = +this.props.match.params.id;
     this.setState({
         id,
-        currentProduct: this.state.products,
+        currentProduct: this.props.products[id],
         loading: false,
     });
   }
@@ -28,9 +28,12 @@ class ProductDetails extends Component {
     this.props.addToCart(this.state.id); 
   }
 
-  render() {  
+  render() {
     console.log('details', this.props)
-    if (this.state.loading) return <h1>Loading...</h1>
+    if (this.state.loading) {
+      console.log('loading');
+      return <h1>Loading...</h1>
+    }
     return (
     <Container>
       <Button 
