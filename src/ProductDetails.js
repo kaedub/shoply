@@ -25,7 +25,7 @@ class ProductDetails extends Component {
 
   handleAddToCart = evt => {
     // let product
-    this.props.addToCart(this.state.id); 
+    this.props.addToCart(this.state.currentProduct); 
   }
 
   render() {
