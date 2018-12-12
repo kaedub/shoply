@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART } from './actionTypes';
+import { ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
 
 export function addProduct(product) {
   return {
@@ -15,9 +15,16 @@ export function removeProduct(id) {
 }
 
 export function addToCart(product) {
-  console.log('action handler', product)
   return {
-    type: ADD_TO_CART,
+    type: ADD_TO_CART, REMOVE_FROM_CART,
     product,
+  }
+}
+
+export function removeFromCart(id) {
+  console.log('action handler', id)
+  return {
+    type: REMOVE_FROM_CART,
+    id
   }
 }

@@ -1,8 +1,8 @@
-import { ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART } from './actionTypes';
+import { ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
 import PRODUCTS_ARR from './data.json';
 
 const PRODUCTS_OBJ = {};
-for (let item of PRODUCTS_ARR.items) {
+for (const item of PRODUCTS_ARR.items) {
   PRODUCTS_OBJ[item.id] = item;
 }
 const INITIAL_STATE = {
@@ -23,12 +23,15 @@ function rootReducer(state=INITIAL_STATE, action) {
         ]
       }
     case REMOVE_PRODUCT:
-      let products = this.state.products.filter(p => p.id !== id);
+      const products = this.state.products.filter(p => p.id !== id);
       return { ...state, products };
     
     case ADD_TO_CART:
-      let product = action.product;
+      const product = action.product;
       return { ...state, cart: [...state.cart, product] };
+
+    case REMOVE_FROM_CART:
+      return { ...state, cart: state.cart.filter(p => p.id !== action.id) };
 
     default:
      return state
